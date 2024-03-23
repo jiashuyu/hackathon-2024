@@ -1,4 +1,4 @@
--- sqlite3 belay.sqlite3 < 20240222_create_tables.sql
+-- sqlite3 belay.sqlite3 < create_tables.sql
 
 create table users
 (
