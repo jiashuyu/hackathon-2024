@@ -295,7 +295,7 @@
     width: 100%;
 }
 
-.d-block{
+.d-block {
     font-size: 18px;
 }
 
@@ -321,6 +321,8 @@
 .alignedForm input:invalid ~ error {
     display: inline;
 }
+
+
 
 /*.splash .hero form {*/
 /*    grid-column: 2/3;*/
@@ -595,11 +597,12 @@
 
 
 /*!* TODO: ---------------------------------------- Responsive Design Styles ---------------------------------------- *!*/
-/*.channel-container {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    height: 100vh;*/
-/*}*/
+.channel-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+
 
 /*!* channel list *!*/
 /*.channel-list {*/

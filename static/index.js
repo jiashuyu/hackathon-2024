@@ -731,25 +731,28 @@ function LoginForm(props) {
             </div>
 
             <div className="container col-md-8 col-lg-6 col-xl-5">
-                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style={{ color: '#333' }}>
+                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style={{color: '#333'}}>
                     Sign In
-                </p >
+                </p>
                 <form onSubmit={handleSubmit} className="alignedForm login">
                     <div className="form-floating">
-                        <input type="text" className="form-control" name="username" placeholder="username" value={username} onChange={handleInputChange} required/>
+                        <input type="text" className="form-control" name="username" placeholder="username"
+                               value={username} onChange={handleInputChange} required/>
                         <label htmlFor="username">User Name</label>
                     </div>
 
 
                     <div className="form-floating">
-                        <input type="password" className="form-control" name="password" placeholder="Password" value={password} onChange={handleInputChange} required/>
+                        <input type="password" className="form-control" name="password" placeholder="Password"
+                               value={password} onChange={handleInputChange} required/>
                         <label htmlFor="password">Password</label>
                     </div>
 
                     <div className="row my-3">
                         <div className="col-6">
                             <div className="form-check">
-                                <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" />
+                                <input className="form-check-input" type="checkbox" value="remember-me"
+                                       id="flexCheckDefault"/>
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Remember me
                                 </label>
@@ -757,7 +760,7 @@ function LoginForm(props) {
                         </div>
                         <div className="col-6 text-end">
                             {/* In future version */}
-                            <a href="/">Forgot password?</a >
+                            <a href="/">Forgot password?</a>
                         </div>
                     </div>
 
@@ -765,7 +768,7 @@ function LoginForm(props) {
                 </form>
 
                 <div className="failed text-center">
-                    <p>Not a member? <a href="/profile" onClick={handleSignup}>Register</a ></p >
+                    <p>Not a member? <a href="/profile" onClick={handleSignup}>Register</a></p>
                 </div>
 
                 {errorMessage && (
@@ -887,7 +890,7 @@ function Profile(props) {
 return (
         <div className="profile">
             <div className="header">
-                <h2><a href=" ">HackaChat</a ></h2>
+                <h2><a href=" ">HackaChat</a></h2>
             </div>
             <div className="clip">
                 <div className="auth container col-md-8 col-lg-6 col-xl-5">
@@ -989,6 +992,13 @@ function ChatChannel(props) {
         return <NotFoundPage/>;
     } else {
         return (
+
+            //      <header className="py-3 mb-4 border-bottom">
+            //                     <div className="container d-flex flex-wrap justify-content-center">
+            //                         <h2><a href="/"
+            //                                className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
+            //                             <span>HackaChat</span> </a>
+            //                         </h2>
             <div className="splash container">
                 <div className="channel">
                     <div className="header">
@@ -1154,79 +1164,14 @@ function ChatChannel(props) {
                                 </button>
                             </div>
 
+                            {/*{!props.messages.length && (*/}
+                            {/*    <div>*/}
+                            {/*        <h2>Oops, we can't find that channel!</h2>*/}
+                            {/*        <p><a href="/">Let's go home and try again.</a></p>*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
 
-                            <div className="container">
-                                <div className="chat">
 
-                                    <div className={`message-list ${view !== 'message' ? 'hidden' : ''}`}>
-                                        {/*<div className="back-button" onClick={handleBackToChannels}>Back to Channels*/}
-                                        {/*</div>*/}
-                                        {/*<div className="messages">*/}
-                                        {/*    {props.messages.map((message, index) => (*/}
-                                        {/*        <div key={index} className="message">*/}
-                                        {/*            <div className="author">{message.name}</div>*/}
-                                        {/*            <div className="content">*/}
-                                        {/*                {message.body}*/}
-                                        {/*                {props.parseImageUrls(message.body).map((url, imgIndex) => (*/}
-                                        {/*                    <img key={imgIndex} src={url} alt="Message Attachment"*/}
-                                        {/*                         style={{*/}
-                                        {/*                             maxWidth: '200px',*/}
-                                        {/*                             maxHeight: '200px',*/}
-                                        {/*                             marginTop: '10px'*/}
-                                        {/*                         }}/>*/}
-                                        {/*                ))}*/}
-                                        {/*            </div>*/}
-
-                                        {/*{message.reactions && message.reactions.length > 0 && (*/}
-                                        {/*    <div className="reactions">*/}
-                                        {/*        {message.reactions.map((reaction, index) => (*/}
-                                        {/*            <span key={index} className="reaction"*/}
-                                        {/*                  onMouseEnter={(e) => {*/}
-                                        {/*                      // Show tooltip*/}
-                                        {/*                      e.currentTarget.querySelector('.users').classList.add('show');*/}
-                                        {/*                  }}*/}
-                                        {/*                  onMouseLeave={(e) => {*/}
-                                        {/*                      // Hide tooltip*/}
-                                        {/*                      e.currentTarget.querySelector('.users').classList.remove('show');*/}
-                                        {/*                  }}>*/}
-                                        {/*                {reaction.emoji} {reaction.users.split(',').length}&nbsp;*/}
-                                        {/*                <span className="users">{reaction.users}</span>*/}
-                                        {/*            </span>*/}
-                                        {/*        ))}*/}
-                                        {/*    </div>*/}
-                                        {/*)}*/}
-
-                                        {/*<div className="message-reactions">*/}
-                                        {/*    {['😀', '❤️', '👍'].map(emoji => (*/}
-                                        {/*        <button key={emoji}*/}
-                                        {/*                onClick={() => props.handleAddReaction(message.id, emoji)}>{emoji}</button>*/}
-                                        {/*    ))}*/}
-                                        {/*</div>*/}
-
-                                        {/*{props.repliesCount[message.id] > 0 ? (*/}
-                                        {/*    <button onClick={() => redirectToThread(id, message.id)}>*/}
-                                        {/*        Replies: {props.repliesCount[message.id]}*/}
-                                        {/*    </button>*/}
-                                        {/*) : (*/}
-                                        {/*    <button onClick={() => redirectToThread(id, message.id)}>Reply!</button>*/}
-                                        {/*)}*/}
-
-                                        {/*        </div>*/}
-                                        {/*    ))}*/}
-                                        {/*</div>*/}
-
-                                        {(<div></div>)}
-
-                                    </div>
-                                </div>
-
-                                {!props.messages.length && (
-                                    <div>
-                                        <h2>Oops, we can't find that channel!</h2>
-                                        <p><a href="/">Let's go home and try again.</a></p>
-                                    </div>
-                                )}
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1528,12 +1473,12 @@ function Thread(props) {
 
                                 </div>
 
-                                {!props.messages.length && (
-                                    <div>
-                                        <h2>Oops, we can't find that channel!</h2>
-                                        <p><a onClick={goToSplash}>Let's go home and try again.</a></p>
-                                    </div>
-                                )}
+                                {/*{!props.messages.length && (*/}
+                                {/*    <div>*/}
+                                {/*        <h2>Oops, we can't find that channel!</h2>*/}
+                                {/*        <p><a onClick={goToSplash}>Let's go home and try again.</a></p>*/}
+                                {/*    </div>*/}
+                                {/*)}*/}
                             </div>
                         </div>
                     </div>
