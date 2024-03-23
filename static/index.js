@@ -890,7 +890,7 @@ function Profile(props) {
 return (
         <div className="profile">
             <div className="header">
-                <h2><a href=" ">HackaChat</a></h2>
+                <h2><a href="/">HackaChat</a></h2>
             </div>
             <div className="clip">
                 <div className="auth container col-md-8 col-lg-6 col-xl-5">
