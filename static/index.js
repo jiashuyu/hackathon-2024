@@ -557,11 +557,13 @@ function SplashScreen(props) {
                         )}
                     </div>
                 </div>
+
                 <div className="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-                    <img className="rounded-lg-3" src="/static/hero.png" alt="HERO-IMG" width="720"/>
+                    <img className="rounded-lg-3" src="/static/hero.png" alt="HERO-IMG"/>
                 </div>
             </div>
         </div>
+
         // <div className="container-fluid mt-5">
         //     <div className="row">
         //         {/* Sidebar for channels */}
@@ -724,7 +726,8 @@ function LoginForm(props) {
     return (
         <div className="login">
             <div className="header">
-                <h2><a href=" ">HackaChat</a ></h2>
+                <h2><a href="/">HackaChat</a ></h2>
+                <h4>Sign in Page</h4>
             </div>
 
             <div className="container col-md-8 col-lg-6 col-xl-5">
@@ -881,32 +884,46 @@ function Profile(props) {
         }
     }, [history]);
 
-    return (
+return (
         <div className="profile">
             <div className="header">
-                <h2><a href="/">HackaChat</a></h2>
-                <h4>Profile Page</h4>
+                <h2><a href=" ">HackaChat</a ></h2>
             </div>
             <div className="clip">
-                <div className="auth container">
-                    <h2>Welcome to HackaChat!</h2>
+                <div className="auth container col-md-8 col-lg-6 col-xl-5">
+                    <p className="text-center h1 fw-bold mb-4 mx-3 mx-md-4 mt-5" style={{ color: '#333' }}>
+                    Welcome to HackaChat!
+                    </p >
                     <div className="alignedForm">
-                        <label htmlFor="username">Username: </label>
-                        <input name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                        <button className="update_name" onClick={handleUpdateUsername}>update</button>
+                        <div className="form-floating d-flex align-items-center my-2">
+                            <input type="text" className="form-control" name="username" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                            <label htmlFor="username">User Name</label>
+                            <button type="button" className="btn btn-primary ms-2" onClick={handleUpdateUsername} style={{ height: '60px' }}>update</button>
+                        </div>
 
-                        <label htmlFor="password">Password: </label>
-                        <input type="password" name="password" value={password}
-                               onChange={(e) => setPassword(e.target.value)}/>
-                        <button className="update_password" onClick={handleUpdatePassword}>update</button>
+                        <div className="form-floating d-flex align-items-center my-2">
+                            <input type="password" className="form-control" name="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <label htmlFor="password">Password</label>
+                            <button type="button" className="btn btn-primary ms-2" onClick={handleUpdatePassword} style={{ height: '60px' }}>update</button>
+                        </div>
 
-                        <label htmlFor="repeatPassword">Repeat: </label>
-                        <input type="password" name="repeatPassword" value={repeatPassword}
-                               onChange={(e) => setRepeatPassword(e.target.value)}/>
-                        {error && <div className="error">{error}</div>}
+                        <div className="form-floating my-2">
+                            <input type="password" className="form-control" name="repeatPassword" placeholder="repeatPassword" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)}/>
+                            <label htmlFor="repeatPassword">Repeat Password</label>
+                        </div>
+                        {error && <div className="error" style={{color: 'red'}}>{error}</div>}
 
-                        <button className="exit goToSplash" onClick={goToSplash}>Cool, let's go!</button>
-                        <button className="exit logout" onClick={handleLogout}>Log out</button>
+                        <div className="d-flex flex-column align-items-stretch my-2">
+                            <div className="row mx-0">
+                                <div className="col px-1">
+                                    <button className="btn btn-primary w-100" onClick={goToSplash}>Cool, let's go!</button>
+                                </div>
+                                <div className="col px-1">
+                                    <button className="btn btn-primary w-100" onClick={handleLogout}>Log out</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

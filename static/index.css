@@ -293,7 +293,6 @@
 .rounded-lg-3 {
     height: 100%;
     width: 100%;
-    padding-right: 20px;
 }
 
 .d-block{
@@ -313,6 +312,14 @@
 
 .reaction:hover .users {
     display: block;
+}
+
+.alignedForm error {
+    display: none;
+}
+
+.alignedForm input:invalid ~ error {
+    display: inline;
 }
 
 /*.splash .hero form {*/
