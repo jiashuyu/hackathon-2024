@@ -10,7 +10,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = sqlite3.connect('db/hackathon2024.sqlite3')
+        db = g._database = sqlite3.connect('db/HackaChat.sqlite3')
         db.row_factory = sqlite3.Row
         setattr(g, '_database', db)
     return db
