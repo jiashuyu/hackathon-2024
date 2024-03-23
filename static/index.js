@@ -1001,23 +1001,56 @@ function ChatChannel(props) {
 
                     <div className="channel-container">
 
-                        <div className={`channel-list ${view !== 'channel' ? 'hidden' : ''}`}>
+                        <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>
+                            <a href=" "
+                               className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                                <span className="fs-4">Channel List</span>
+                            </a>
+                            <hr></hr>
                             {props.channels.length > 0 ? (
-                                <div className="channelList">
+                                <ul className="nav nav-pills flex-column mb-auto">
                                     {props.channels.map((channel) => (
-                                        <button key={channel.id} onClick={() => redirectToChannel(channel.id)}
-                                                style={{backgroundColor: channel.id === parseInt(id, 10) ? 'orange' : 'transparent'}}>
-                                            {channel.name}
-                                            {props.unreadCounts[channel.id] !== 0 && props.user &&
-                                                <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
-                                        </button>
+                                        <li className="nav-item">
+                                            <a className="nav-link link-body-emphasis" key={channel.id}
+                                               onClick={() => redirectToChannel(channel.id)}
+                                               style={{backgroundColor: channel.id === parseInt(id, 10) ? '#0d6efd' : 'transparent'}}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                                                </svg>
+                                                {channel.name}
+                                                {props.unreadCounts[channel.id] !== 0 && props.user &&
+                                                    <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
+                                            </a>
+                                        </li>
+
                                     ))}
-                                </div>
+                                </ul>
                             ) : (
-                                <div className="noChannels">No channels yet! Create the first channel on
-                                    HackaChat!</div>
+                                <div>No channels yet! Create the first channel on HackaChat!</div>
                             )}
+                            <hr></hr>
+
                         </div>
+
+                        {/*<div className={`channel-list ${view !== 'channel' ? 'hidden' : ''}`}>*/}
+                        {/*    {props.channels.length > 0 ? (*/}
+                        {/*        <div className="channelList">*/}
+                        {/*            {props.channels.map((channel) => (*/}
+                        {/*                <button key={channel.id} onClick={() => redirectToChannel(channel.id)}*/}
+                        {/*                        style={{backgroundColor: channel.id === parseInt(id, 10) ? 'orange' : 'transparent'}}>*/}
+                        {/*                    {channel.name}*/}
+                        {/*                    {props.unreadCounts[channel.id] !== 0 && props.user &&*/}
+                        {/*                        <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}*/}
+                        {/*                </button>*/}
+                        {/*            ))}*/}
+                        {/*        </div>*/}
+                        {/*    ) : (*/}
+                        {/*        <div className="noChannels">No channels yet! Create the first channel on*/}
+                        {/*            HackaChat!</div>*/}
+                        {/*    )}*/}
+                        {/*</div>*/}
 
                         <div className="my-3 p-3 bg-body rounded shadow-sm">
                             <button type="button" class="btn btn-outline-secondary" onClick={handleBackToChannels}>Back
@@ -1069,23 +1102,23 @@ function ChatChannel(props) {
                                         </div>
                                         <span>
                                             {message.reactions && message.reactions.length > 0 && (
-                                            <div className="reactions">
-                                                {message.reactions.map((reaction, index) => (
-                                                    <span key={index} className="reaction"
-                                                          onMouseEnter={(e) => {
-                                                              // Show tooltip
-                                                              e.currentTarget.querySelector('.users').classList.add('show');
-                                                          }}
-                                                          onMouseLeave={(e) => {
-                                                              // Hide tooltip
-                                                              e.currentTarget.querySelector('.users').classList.remove('show');
-                                                          }}>
+                                                <div className="reactions">
+                                                    {message.reactions.map((reaction, index) => (
+                                                        <span key={index} className="reaction"
+                                                              onMouseEnter={(e) => {
+                                                                  // Show tooltip
+                                                                  e.currentTarget.querySelector('.users').classList.add('show');
+                                                              }}
+                                                              onMouseLeave={(e) => {
+                                                                  // Hide tooltip
+                                                                  e.currentTarget.querySelector('.users').classList.remove('show');
+                                                              }}>
                                                                     {reaction.emoji} {reaction.users.split(',').length}&nbsp;
-                                                        <span className="users">{reaction.users}</span>
+                                                            <span className="users">{reaction.users}</span>
                                                                 </span>
-                                                ))}
-                                            </div>
-                                        )}
+                                                    ))}
+                                                </div>
+                                            )}
                                         </span>
 
 
