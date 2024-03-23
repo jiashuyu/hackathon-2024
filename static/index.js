@@ -550,22 +550,6 @@ function SplashScreen(props) {
                 </div>
             </div>
 
-            <div className="channels">
-                {props.channels.length > 0 ? (
-                    <div className="channelList">
-                        {props.channels.map((channel) => (
-                            <button key={channel.id} onClick={() => redirectToChannel(channel.id)}>
-                                {channel.name}
-                                {props.unreadCounts[channel.id] !== 0 && props.user &&
-                                    <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
-                            </button>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="noChannels">No channels yet! Create the first channel on HackaChat!</div>
-                )}
-            </div>
-
             <div className="hero">
                 <div className="logo">
                     <img id="hero-img" src="/static/hero.png" alt="HERO-IMG"/>
