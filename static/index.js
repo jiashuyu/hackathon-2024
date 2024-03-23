@@ -676,47 +676,102 @@ function LoginForm(props) {
         document.title = "HackaChat Login Page";
     }, []); // The empty array ensures this effect runs only once after the initial render
 
+    // return (
+    //     <div className="login">
+    //         <div className="header">
+    //             <h2><a href="/">HackaChat</a></h2>
+    //             <h4>Login Page</h4>
+    //         </div>
+    //         <div className="clip">
+    //             <div className="auth container">
+    //                 <h3>Enter your username and password to log in:</h3>
+    //                 <form onSubmit={handleSubmit} className="alignedForm login">
+    //                     <label htmlFor="username">Username</label>
+    //                     <input
+    //                         type="text"
+    //                         name="username"
+    //                         value={username}
+    //                         onChange={handleInputChange}
+    //                         required
+    //                     />
+    //                     <div></div>
+    //                     <label htmlFor="password">Password</label>
+    //                     <input
+    //                         type="password"
+    //                         name="password"
+    //                         value={password}
+    //                         onChange={handleInputChange}
+    //                         required
+    //                     />
+    //                     <button type="submit">Login</button>
+    //                 </form>
+    //                 <div className="failed">
+    //                     <button type="button" onClick={handleSignup}>Create a new Account</button>
+    //                 </div>
+    //
+    //                 {errorMessage && (
+    //                     <div className="failed">
+    //                         <div className="message">
+    //                             {errorMessage}
+    //                         </div>
+    //                     </div>
+    //                 )}
+    //             </div>
+    //         </div>
+    //     </div>
+    // );
+
     return (
         <div className="login">
             <div className="header">
-                <h2><a href="/">HackaChat</a></h2>
-                <h4>Login Page</h4>
+                <h2><a href=" ">HackaChat</a ></h2>
             </div>
-            <div className="clip">
-                <div className="auth container">
-                    <h3>Enter your username and password to log in:</h3>
-                    <form onSubmit={handleSubmit} className="alignedForm login">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={username}
-                            onChange={handleInputChange}
-                            required
-                        />
-                        <div></div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={password}
-                            onChange={handleInputChange}
-                            required
-                        />
-                        <button type="submit">Login</button>
-                    </form>
-                    <div className="failed">
-                        <button type="button" onClick={handleSignup}>Create a new Account</button>
+
+            <div className="container col-md-8 col-lg-6 col-xl-5">
+                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style={{ color: '#333' }}>
+                    Sign In
+                </p >
+                <form onSubmit={handleSubmit} className="alignedForm login">
+                    <div className="form-floating">
+                        <input type="text" className="form-control" name="username" placeholder="username" value={username} onChange={handleInputChange} required/>
+                        <label htmlFor="username">User Name</label>
                     </div>
 
-                    {errorMessage && (
-                        <div className="failed">
-                            <div className="message">
-                                {errorMessage}
+
+                    <div className="form-floating">
+                        <input type="password" className="form-control" name="password" placeholder="Password" value={password} onChange={handleInputChange} required/>
+                        <label htmlFor="password">Password</label>
+                    </div>
+
+                    <div className="row my-3">
+                        <div className="col-6">
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" />
+                                <label className="form-check-label" htmlFor="flexCheckDefault">
+                                    Remember me
+                                </label>
                             </div>
                         </div>
-                    )}
+                        <div className="col-6 text-end">
+                            {/* In future version */}
+                            <a href="/">Forgot password?</a >
+                        </div>
+                    </div>
+
+                    <button className="btn btn-primary w-100 py-2 mb-3" type="submit">Login</button>
+                </form>
+
+                <div className="failed text-center">
+                    <p>Not a member? <a href="/profile" onClick={handleSignup}>Register</a ></p >
                 </div>
+
+                {errorMessage && (
+                    <div className="failed">
+                        <div className="message">
+                            {errorMessage}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
