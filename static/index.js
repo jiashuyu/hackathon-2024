@@ -535,50 +535,81 @@ function SplashScreen(props) {
     }
 
     return (
-        <div className="splash container">
-
-            <div className="splashHeader">
-                <div className="loginHeader">
-                    {props.user ? (
-                        <div className="loggedIn" onClick={handleProfileClick}>
-                            <span className="username">Welcome back, {props.user.username}!</span>
-                            <span className="material-symbols-outlined md-18">person</span>
-                        </div>
-                    ) : (
-                        <button onClick={handleLoginClick}>Login</button>
-                    )}
-                </div>
-            </div>
-
-            <div className="channels">
-                {props.channels.length > 0 ? (
-                    <div className="channelList">
-                        {props.channels.map((channel) => (
-                            <button key={channel.id} onClick={() => redirectToChannel(channel.id)}>
-                                {channel.name}
-                                {props.unreadCounts[channel.id] !== 0 && props.user &&
-                                    <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
-                            </button>
-                        ))}
+        <div className="container my-5">
+            <div className="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+                <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                    <h1 className="display-4 fw-bold lh-1 text-body-emphasis">HackaChat</h1>
+                    <p className="lead">A Chat Room created for Hackathon 2024.</p>
+                    <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                        {props.user ? (
+                            <button type="button" className="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
+                                    onClick={handleProfileClick}>Welcome back, {props.user.username}!</button>
+                        ) : (
+                            <button type="button" className="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
+                                    onClick={handleLoginClick}>Login</button>
+                        )}
+                        {props.user ? (
+                            <button type="button" className="btn btn-outline-secondary btn-lg px-4"
+                                    onClick={handleCreateChannel}>Create a Channel</button>
+                        ) : (
+                            <button type="button" className="btn btn-outline-secondary btn-lg px-4"
+                                    onClick={handleSignup}>Signup</button>
+                        )}
                     </div>
-                ) : (
-                    <div className="noChannels">No channels yet! Create the first channel on HackaChat!</div>
-                )}
-            </div>
-
-            <div className="hero">
-                <div className="logo">
-                    <img id="hero-img" src="/static/hero.png" alt="HERO-IMG"/>
                 </div>
-                <h1>HackaChat</h1>
-                {props.user ? (
-                    <button className="create" onClick={handleCreateChannel}>Create a Channel</button>
-                ) : (
-                    <button className="signup" onClick={handleSignup}>Signup</button>
-                )}
+                <div className="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                    <img className="rounded-lg-3" src="/static/hero.png" alt="HERO-IMG" width="720"/>
+                </div>
             </div>
-
         </div>
+        // <div className="container-fluid mt-5">
+        //     <div className="row">
+        //         {/* Sidebar for channels */}
+        //         <div className="col-md-3">
+        //             {props.channels.length > 0 ? (
+        //                 <div className="list-group">
+        //                     {props.channels.map((channel) => (
+        //                         <button key={channel.id} className="list-group-item list-group-item-action" onClick={() => redirectToChannel(channel.id)}>
+        //                             {channel.name}
+        //                             {props.unreadCounts[channel.id] !== 0 && props.user &&
+        //                                 <strong> ({props.unreadCounts[channel.id]} unread messages)</strong>}
+        //                         </button>
+        //                     ))}
+        //                 </div>
+        //             ) : (
+        //                 <div className="alert alert-warning" role="alert">
+        //                     No channels yet! Create the first channel on HackaChat!
+        //                 </div>
+        //             )}
+        //         </div>
+        //
+        //         {/* Main content */}
+        //         <div className="col-md-9">
+        //             <div className="d-flex justify-content-between align-items-center mb-4">
+        //                 {props.user ? (
+        //                     <div className="d-flex align-items-center" onClick={handleProfileClick}>
+        //                         <span className="me-2">Welcome back, {props.user.username}!</span>
+        //                         <span className="material-symbols-outlined md-18">person</span>
+        //                     </div>
+        //                 ) : (
+        //                     <button className="btn btn-primary" onClick={handleLoginClick}>Login</button>
+        //                 )}
+        //             </div>
+        //
+        //             <div className="text-center">
+        //                 <div className="mb-4">
+        //                     <img id="hero-img" className="img-fluid" src="/static/hero.png" alt="HERO-IMG"/>
+        //                 </div>
+        //                 <h1>HackaChat</h1>
+        //                 {props.user ? (
+        //                     <button className="btn btn-success mt-3" onClick={handleCreateChannel}>Create a Channel</button>
+        //                 ) : (
+        //                     <button className="btn btn-secondary mt-3" onClick={handleSignup}>Signup</button>
+        //                 )}
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
     );
 }
 
