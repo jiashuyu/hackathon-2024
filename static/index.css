@@ -263,14 +263,9 @@ button:hover {
     grid-row: 1/3;
 }
 
-.splash .logo img#tv {
-    height: 300px;
-    padding-left: 60px;
-}
-
-.splash .logo img#popcorn {
-    height: 200px;
-    padding-top: 100px;
+.splash .logo img#hero-img {
+    height: 810px;
+    padding-left: 95px;
 }
 
 .splash .hero form {

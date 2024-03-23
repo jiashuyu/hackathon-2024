@@ -568,8 +568,7 @@ function SplashScreen(props) {
 
             <div className="hero">
                 <div className="logo">
-                    <img id="tv" src="/static/tv.jpeg" alt="TV"/>
-                    <img id="popcorn" src="/static/popcorn.png" alt="Popcorn"/>
+                    <img id="hero-img" src="/static/hero.png" alt="HERO-IMG"/>
                 </div>
                 <h1>HackaChat</h1>
                 {props.user ? (
