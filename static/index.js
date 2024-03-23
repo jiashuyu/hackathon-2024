@@ -9,7 +9,7 @@ const {
 
 // TODO: --------------------------------------------- App Component ---------------------------------------------
 function App() {
-    const apiKey = localStorage.getItem('shuyuj_belay_auth_key');
+    const apiKey = localStorage.getItem('HackaChat_auth_key');
 
     const [user, setUser] = React.useState(null); // State to hold current user info
     const [channels, setChannels] = React.useState([]); // State to hold current channel list
@@ -45,7 +45,7 @@ function App() {
                     username: data.username,
                     apiKey: data.api_key
                 });
-                localStorage.setItem('shuyuj_belay_auth_key', data.api_key);
+                localStorage.setItem('HackaChat_auth_key', data.api_key);
                 return true;
             })
             .catch(error => {
@@ -434,7 +434,7 @@ function App() {
 
 // TODO: --------------------------------------------- Splash Component ---------------------------------------------
 function SplashScreen(props) {
-    const apiKey = localStorage.getItem('shuyuj_belay_auth_key');
+    const apiKey = localStorage.getItem('HackaChat_auth_key');
     const history = useHistory();
 
     const handleSignup = () => {
@@ -449,7 +449,7 @@ function SplashScreen(props) {
                 return response.json();
             })
             .then(data => {
-                localStorage.setItem('shuyuj_belay_auth_key', data.api_key);
+                localStorage.setItem('HackaChat_auth_key', data.api_key);
                 props.setUser({id: data.id, username: data.username, apiKey: data.api_key});
                 history.push('/profile');
             })
@@ -511,7 +511,7 @@ function SplashScreen(props) {
     }
 
     React.useEffect(() => {
-        document.title = "Belay Main Page";
+        document.title = "HackaChat Main Page";
         props.fetchChannelList();
         fetchUserInfo();
         props.fetchUnreadMessageCounts();
@@ -562,7 +562,7 @@ function SplashScreen(props) {
                         ))}
                     </div>
                 ) : (
-                    <div className="noChannels">No channels yet! Create the first channel on Belay!</div>
+                    <div className="noChannels">No channels yet! Create the first channel on HackaChat!</div>
                 )}
             </div>
 
@@ -571,7 +571,7 @@ function SplashScreen(props) {
                     <img id="tv" src="/static/tv.jpeg" alt="TV"/>
                     <img id="popcorn" src="/static/popcorn.png" alt="Popcorn"/>
                 </div>
-                <h1>Belay</h1>
+                <h1>HackaChat</h1>
                 {props.user ? (
                     <button className="create" onClick={handleCreateChannel}>Create a Channel</button>
                 ) : (
@@ -604,7 +604,7 @@ function LoginForm(props) {
                 return response.json();
             })
             .then(data => {
-                localStorage.setItem('shuyuj_belay_auth_key', data.api_key);
+                localStorage.setItem('HackaChat_auth_key', data.api_key);
                 props.setUser({id: data.id, username: data.username, apiKey: data.api_key});
                 history.push('/profile');
             })
@@ -639,17 +639,17 @@ function LoginForm(props) {
     };
 
     React.useEffect(() => {
-        const apiKey = localStorage.getItem('shuyuj_belay_auth_key');
+        const apiKey = localStorage.getItem('HackaChat_auth_key');
         if (apiKey) {
             history.push('/profile');
         }
-        document.title = "Belay Login Page";
+        document.title = "HackaChat Login Page";
     }, []); // The empty array ensures this effect runs only once after the initial render
 
     return (
         <div className="login">
             <div className="header">
-                <h2><a href="/">Belay</a></h2>
+                <h2><a href="/">HackaChat</a></h2>
                 <h4>Login Page</h4>
             </div>
             <div className="clip">
@@ -695,7 +695,7 @@ function LoginForm(props) {
 
 // TODO: --------------------------------------------- Profile Component ---------------------------------------------
 function Profile(props) {
-    const apiKey = localStorage.getItem('shuyuj_belay_auth_key');
+    const apiKey = localStorage.getItem('HackaChat_auth_key');
     const history = useHistory();
 
     const [username, setUsername] = React.useState(props.user ? props.user.username : '');
@@ -705,7 +705,7 @@ function Profile(props) {
 
     const handleLogout = () => {
         props.setUser(null);
-        localStorage.removeItem('shuyuj_belay_auth_key');
+        localStorage.removeItem('HackaChat_auth_key');
         history.push("/login");
     };
 
@@ -771,7 +771,7 @@ function Profile(props) {
         if (!apiKey) {
             history.push('/login');
         } else {
-            document.title = "Belay Profile Page";
+            document.title = "HackaChat Profile Page";
             fetch('/api/profile', {
                 method: 'GET',
                 headers: {
@@ -799,12 +799,12 @@ function Profile(props) {
     return (
         <div className="profile">
             <div className="header">
-                <h2><a href="/">Belay</a></h2>
+                <h2><a href="/">HackaChat</a></h2>
                 <h4>Profile Page</h4>
             </div>
             <div className="clip">
                 <div className="auth container">
-                    <h2>Welcome to Belay!</h2>
+                    <h2>Welcome to HackaChat!</h2>
                     <div className="alignedForm">
                         <label htmlFor="username">Username: </label>
                         <input name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
@@ -832,7 +832,7 @@ function Profile(props) {
 
 // TODO: --------------------------------------------- Channel Component ---------------------------------------------
 function ChatChannel(props) {
-    const apiKey = localStorage.getItem('shuyuj_belay_auth_key');
+    const apiKey = localStorage.getItem('HackaChat_auth_key');
     const {id} = useParams();
     const history = useHistory();
 
@@ -843,7 +843,7 @@ function ChatChannel(props) {
             history.push('/login');
             alert("Please login before entering to the channels.")
         }
-        document.title = `Belay Channel #${id}`;
+        document.title = `HackaChat Channel #${id}`;
         props.fetchChannelList();
         props.fetchUnreadMessageCounts();
         props.fetchChannelDetail(id);
@@ -890,7 +890,7 @@ function ChatChannel(props) {
             <div className="splash container">
                 <div className="channel">
                     <div className="header">
-                        <h2><a href="/">Belay</a></h2>
+                        <h2><a href="/">HackaChat</a></h2>
                         <div className="channelDetail">
                             {!props.isEditing && props.channel ? (
                                 <div>
@@ -929,7 +929,7 @@ function ChatChannel(props) {
                                     ))}
                                 </div>
                             ) : (
-                                <div className="noChannels">No channels yet! Create the first channel on Belay!</div>
+                                <div className="noChannels">No channels yet! Create the first channel on HackaChat!</div>
                             )}
                         </div>
 
@@ -1022,7 +1022,7 @@ function ChatChannel(props) {
 
 // TODO: --------------------------------------------- Thread Component ---------------------------------------------
 function Thread(props) {
-    const apiKey = localStorage.getItem('shuyuj_belay_auth_key');
+    const apiKey = localStorage.getItem('HackaChat_auth_key');
     const {id, msg_id} = useParams();
     const history = useHistory();
 
@@ -1034,7 +1034,7 @@ function Thread(props) {
             history.push('/login');
             alert("Please login before entering to the thread.")
         }
-        document.title = `Belay Channel #${id} Thread #${msg_id}`;
+        document.title = `HackaChat Channel #${id} Thread #${msg_id}`;
         props.setSelectedMessageId(msg_id);
         props.fetchChannelList();
         props.fetchUnreadMessageCounts();
@@ -1105,7 +1105,7 @@ function Thread(props) {
 
                 <div className="channel">
                     <div className="header">
-                        <h2><a href="/">Belay</a></h2>
+                        <h2><a href="/">HackaChat</a></h2>
                         <div className="channelDetail">
                             {!props.isEditing && props.channel ? (
                                 <div>
@@ -1144,7 +1144,7 @@ function Thread(props) {
                                     ))}
                                 </div>
                             ) : (
-                                <div className="noChannels">No channels yet! Create the first channel on Belay!</div>
+                                <div className="noChannels">No channels yet! Create the first channel on HackaChat!</div>
                             )}
                         </div>
 
@@ -1323,11 +1323,11 @@ function Thread(props) {
 
 // TODO: --------------------------------------------- 404 Component ---------------------------------------------
 function NotFoundPage() {
-    document.title = "Belay 404 Page";
+    document.title = "HackaChat 404 Page";
     return (
         <div className="notFound">
             <div className="header">
-                <h2><a href="/">Belay</a></h2>
+                <h2><a href="/">HackaChat</a></h2>
                 <h4>404 Error</h4>
             </div>
             <div className="clip">
