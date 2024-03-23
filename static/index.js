@@ -535,7 +535,40 @@ function SplashScreen(props) {
     }
 
     return (
-        <div className="container my-5">
+    <div className="container my-5">
+        <div className="home-container">
+
+            <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>
+                <a href=" "
+                   className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <span className="fs-4">Channel List</span>
+                </a>
+                <hr></hr>
+                {props.channels.length > 0 ? (
+                    <ul className="nav nav-pills flex-column mb-auto">
+                        {props.channels.map((channel) => (
+                            <li className="nav-item">
+                                <a className="nav-link link-body-emphasis" key={channel.id}
+                                   onClick={() => redirectToChannel(channel.id)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                                    </svg>
+                                    {channel.name}
+                                    {props.unreadCounts[channel.id] !== 0 && props.user &&
+                                        <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
+                                </a>
+                            </li>
+
+                        ))}
+                    </ul>
+                ) : (
+                    <div>No channels yet! Create the first channel on HackaChat!</div>
+                )}
+                <hr></hr>
+            </div>
+
             <div className="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
                 <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
                     <h1 className="display-4 fw-bold lh-1 text-body-emphasis">HackaChat</h1>
@@ -563,6 +596,8 @@ function SplashScreen(props) {
                 </div>
             </div>
         </div>
+
+    </div>
 
         // <div className="container-fluid mt-5">
         //     <div className="row">
