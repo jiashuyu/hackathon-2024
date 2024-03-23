@@ -1027,13 +1027,6 @@ function ChatChannel(props) {
         return <NotFoundPage/>;
     } else {
         return (
-
-            //      <header className="py-3 mb-4 border-bottom">
-            //                     <div className="container d-flex flex-wrap justify-content-center">
-            //                         <h2><a href="/"
-            //                                className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
-            //                             <span>HackaChat</span> </a>
-            //                         </h2>
             <div className="splash container">
                 <div className="channel">
                     <div className="header">
@@ -1208,6 +1201,7 @@ function ChatChannel(props) {
 
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -1298,7 +1292,6 @@ function Thread(props) {
     } else {
         return (
             <div className="splash container">
-
                 <div className="channel">
                     <div className="header">
                         <h2><a href="/">HackaChat</a></h2>
@@ -1325,195 +1318,241 @@ function Thread(props) {
                         </div>
                     </div>
 
-                    <div className="channel-container">
+                    <div className="thread-container">
 
-                        <div className={`channel-list ${view !== 'channel' ? 'hidden' : ''}`}>
+                        <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>
+                            <a href=" "
+                               className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                                <span className="fs-4">Channel List</span>
+                            </a>
+                            <hr></hr>
                             {props.channels.length > 0 ? (
-                                <div className="channelList">
+                                <ul className="nav nav-pills flex-column mb-auto">
                                     {props.channels.map((channel) => (
-                                        <button key={channel.id} onClick={() => redirectToChannel(channel.id)}
-                                                style={{backgroundColor: channel.id === parseInt(id, 10) ? 'orange' : 'transparent'}}>
-                                            {channel.name}
-                                            {props.unreadCounts[channel.id] !== 0 && props.user &&
-                                                <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
-                                        </button>
+                                        <li className="nav-item">
+                                            <a className="nav-link link-body-emphasis" key={channel.id}
+                                               onClick={() => redirectToChannel(channel.id)}
+                                               style={{backgroundColor: channel.id === parseInt(id, 10) ? '#0d6efd' : 'transparent'}}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                                                </svg>
+                                                {channel.name}
+                                                {props.unreadCounts[channel.id] !== 0 && props.user &&
+                                                    <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
+                                            </a>
+                                        </li>
+
                                     ))}
-                                </div>
+                                </ul>
                             ) : (
-                                <div className="noChannels">No channels yet! Create the first channel on
-                                    HackaChat!</div>
+                                <div>No channels yet! Create the first channel on HackaChat!</div>
                             )}
+                            <hr></hr>
+
                         </div>
 
-                        <div className="clip">
-                            <div className="container">
-                                <div className="chat">
-                                    <div className={`narrow-message-list ${view !== 'message' ? 'hidden' : ''}`}>
-                                        <div className="back-button" onClick={handleBackToChannels}>Back to Channels
+                        {/*<div className={`channel-list ${view !== 'channel' ? 'hidden' : ''}`}>*/}
+                        {/*    {props.channels.length > 0 ? (*/}
+                        {/*        <div className="channelList">*/}
+                        {/*            {props.channels.map((channel) => (*/}
+                        {/*                <button key={channel.id} onClick={() => redirectToChannel(channel.id)}*/}
+                        {/*                        style={{backgroundColor: channel.id === parseInt(id, 10) ? 'orange' : 'transparent'}}>*/}
+                        {/*                    {channel.name}*/}
+                        {/*                    {props.unreadCounts[channel.id] !== 0 && props.user &&*/}
+                        {/*                        <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}*/}
+                        {/*                </button>*/}
+                        {/*            ))}*/}
+                        {/*        </div>*/}
+                        {/*    ) : (*/}
+                        {/*        <div className="noChannels">No channels yet! Create the first channel on*/}
+                        {/*            HackaChat!</div>*/}
+                        {/*    )}*/}
+                        {/*</div>*/}
+
+                        <div className="my-3 p-3 bg-body rounded shadow-sm">
+                            <button type="button" className="btn btn-outline-secondary"
+                                    onClick={handleBackToChannels}>Back
+                                to Channels
+                            </button>
+
+                            {props.messages.map((message, index) => (
+
+                                <div className="d-flex text-body-secondary pt-3">
+                                    <svg className="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32"
+                                         height="32"
+                                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                                         preserveAspectRatio="xMidYMid slice" focusable="false">
+                                        <title>Placeholder</title>
+                                        <rect width="100%" height="100%" fill="#007bff"></rect>
+                                        <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+                                    </svg>
+                                    <div className="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                        <div className="d-flex justify-content-between">
+                                            <strong className="text-gray-dark">{message.name}</strong>
+                                            {props.repliesCount[message.id] > 0 ? (
+                                                <button type="button" className="btn btn-outline-primary"
+                                                        onClick={() => redirectToThread(id, message.id)}>
+                                                    Replies: {props.repliesCount[message.id]}
+                                                </button>
+                                            ) : (
+                                                <button type="button" className="btn btn-outline-primary"
+                                                        onClick={() => redirectToThread(id, message.id)}>Reply!</button>
+                                            )}
                                         </div>
 
-                                        <div className="messages">
-                                            {props.messages.map((message, index) => (
-                                                <div key={index} className="message">
-                                                    <div className="author">{message.name}</div>
-                                                    <div className="content">
-                                                        {message.body}
-                                                        {/* Display images after the message content */}
-                                                        {props.parseImageUrls(message.body).map((url, imgIndex) => (
-                                                            <img key={imgIndex} src={url} alt="Message Attachment"
-                                                                 style={{
-                                                                     maxWidth: '200px',
-                                                                     maxHeight: '200px',
-                                                                     marginTop: '10px'
-                                                                 }}/>
-                                                        ))}
-                                                    </div>
-
-                                                    {message.reactions && message.reactions.length > 0 && (
-                                                        <div className="reactions">
-                                                            {message.reactions.map((reaction, index) => (
-                                                                <span key={index} className="reaction"
-                                                                      onMouseEnter={(e) => {
-                                                                          // Show tooltip
-                                                                          e.currentTarget.querySelector('.users').classList.add('show');
-                                                                      }}
-                                                                      onMouseLeave={(e) => {
-                                                                          // Hide tooltip
-                                                                          e.currentTarget.querySelector('.users').classList.remove('show');
-                                                                      }}>
-                                                                    {reaction.emoji} {reaction.users.split(',').length}&nbsp;
-                                                                    <span className="users">{reaction.users}</span>
-                                                                </span>
-                                                            ))}
-                                                        </div>
-                                                    )}
-
-                                                    <div className="message-reactions">
-                                                        {['😀', '❤️', '👍'].map(emoji => (
-                                                            <button key={emoji}
-                                                                    onClick={() => props.handleAddReaction(message.id, emoji)}>{emoji}</button>
-                                                        ))}
-                                                    </div>
-
-                                                    {props.repliesCount[message.id] > 0 ? (
-                                                        <button onClick={() => redirectToThread(id, message.id)}>
-                                                            Replies: {props.repliesCount[message.id]}
-                                                        </button>
-                                                    ) : (
-                                                        <button
-                                                            onClick={() => redirectToThread(id, message.id)}>Reply!</button>
-                                                    )}
-
-                                                </div>
+                                        <div className="d-flex justify-content-between">
+                                            <span className="d-block">{message.body}</span>
+                                            {props.parseImageUrls(message.body).map((url, imgIndex) => (
+                                                <img key={imgIndex} src={url} alt="Message Attachment"
+                                                     style={{
+                                                         maxWidth: '200px',
+                                                         maxHeight: '200px',
+                                                         marginTop: '10px'
+                                                     }}/>
                                             ))}
-                                        </div>
 
-                                        {(<div></div>)}
-                                        <div className="comment_box">
-                                            <label htmlFor="comment">What do you want to say?</label>
-                                            <textarea name="comment" value={props.newMessage}
-                                                      onChange={(e) => props.setNewMessage(e.target.value)}></textarea>
-                                            <button onClick={(e) => props.handlePostMessage(e, id)}>Post</button>
-                                        </div>
-                                    </div>
-
-
-                                    <div className={`reply-list ${view !== 'reply' ? 'hidden' : ''}`}>
-                                        <div className="back-button" onClick={handleBackToChannels}>Back to Channels
-                                        </div>
-                                        <button onClick={() => redirectToChannel(id)}>close</button>
-                                        <h3>Message</h3>
-                                        <div className="message">
-                                            <div
-                                                className="author">{props.selectedMessage && props.selectedMessage.name}</div>
-                                            <div className="content">
-                                                {props.selectedMessage && props.selectedMessage.body}
-                                                {/* Display images after the message content */}
-                                                {props.selectedMessage && props.parseImageUrls(props.selectedMessage.body).map((url, imgIndex) => (
-                                                    <img key={imgIndex} src={url} alt="Message Attachment"
-                                                         style={{
-                                                             maxWidth: '100px',
-                                                             maxHeight: '100px',
-                                                             marginTop: '10px'
-                                                         }}/>
+                                            <div className="message-reactions">
+                                                {['😀', '❤️', '👍'].map(emoji => (
+                                                    <button type="button" className="btn btn-outline-light" key={emoji}
+                                                            onClick={() => props.handleAddReaction(message.id, emoji)}>{emoji}</button>
                                                 ))}
                                             </div>
                                         </div>
-
-                                        <h3>Replies</h3>
-                                        {props.replies && props.replies.length > 0 ? (
-                                            props.replies.map((reply, index) => (
-                                                <div key={index} className="reply">
-                                                    <div className="author">{reply.name}</div>
-                                                    <div className="content">
-                                                        {reply.body}
-                                                        {/* Display images after the reply content */}
-                                                        {props.parseImageUrls(reply.body).map((url, imgIndex) => (
-                                                            <img key={imgIndex} src={url} alt="Message Attachment"
-                                                                 style={{
-                                                                     maxWidth: '100px',
-                                                                     maxHeight: '100px',
-                                                                     marginTop: '10px'
-                                                                 }}/>
-                                                        ))}
-                                                    </div>
-
-                                                    {reply.reactions && reply.reactions.length > 0 && (
-                                                        <div className="reactions">
-                                                            {reply.reactions.map((reaction, index) => (
-                                                                <span key={index} className="reaction"
-                                                                      onMouseEnter={(e) => {
-                                                                          // Show tooltip
-                                                                          e.currentTarget.querySelector('.users').classList.add('show');
-                                                                      }}
-                                                                      onMouseLeave={(e) => {
-                                                                          // Hide tooltip
-                                                                          e.currentTarget.querySelector('.users').classList.remove('show');
-                                                                      }}>
+                                        <span>
+                                            {message.reactions && message.reactions.length > 0 && (
+                                                <div className="reactions">
+                                                    {message.reactions.map((reaction, index) => (
+                                                        <span key={index} className="reaction"
+                                                              onMouseEnter={(e) => {
+                                                                  // Show tooltip
+                                                                  e.currentTarget.querySelector('.users').classList.add('show');
+                                                              }}
+                                                              onMouseLeave={(e) => {
+                                                                  // Hide tooltip
+                                                                  e.currentTarget.querySelector('.users').classList.remove('show');
+                                                              }}>
                                                                     {reaction.emoji} {reaction.users.split(',').length}&nbsp;
-                                                                    <span className="users">{reaction.users}</span>
+                                                            <span className="users">{reaction.users}</span>
                                                                 </span>
-                                                            ))}
-                                                        </div>
-                                                    )}
-
-                                                    <div className="message-reactions">
-                                                        {['😀', '❤️', '👍'].map(emoji => (
-                                                            <button key={emoji}
-                                                                    onClick={() => props.handleAddReaction(reply.id, emoji)}>{emoji}</button>
-                                                        ))}
-                                                    </div>
-
+                                                    ))}
                                                 </div>
-                                            ))
-                                        ) : (
-                                            <p>No replies yet.</p>
-                                        )}
-                                        {(<div></div>)}
-                                        <div className="comment_box">
-                                            <label htmlFor="comment">What do you want to reply?</label>
-                                            <textarea
-                                                name="comment"
-                                                value={props.replyInput[props.selectedMessageId] || ''}
-                                                onChange={(e) => props.setReplyInput({
-                                                    ...props.replyInput,
-                                                    [props.selectedMessageId]: e.target.value
-                                                })}
-                                            ></textarea>
-                                            <button
-                                                onClick={(e) => props.handlePostReply(e, props.selectedMessageId)}>Post
-                                            </button>
-                                        </div>
+                                            )}
+                                        </span>
+
+
                                     </div>
 
                                 </div>
 
-                                {/*{!props.messages.length && (*/}
-                                {/*    <div>*/}
-                                {/*        <h2>Oops, we can't find that channel!</h2>*/}
-                                {/*        <p><a onClick={goToSplash}>Let's go home and try again.</a></p>*/}
-                                {/*    </div>*/}
-                                {/*)}*/}
+                            ))}
+                            <div className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 comment_box" role="search">
+                                <textarea name="comment" value={props.newMessage}
+                                          onChange={(e) => props.setNewMessage(e.target.value)} className="form-control"
+                                          style={{width: '100%'}}
+                                          placeholder="What you want to say?"></textarea>
+                                <button className="btn btn-primary"
+                                        onClick={(e) => props.handlePostMessage(e, id)}>Post
+                                </button>
+                            </div>
+
+                            {/*{!props.messages.length && (*/}
+                            {/*    <div>*/}
+                            {/*        <h2>Oops, we can't find that channel!</h2>*/}
+                            {/*        <p><a href="/">Let's go home and try again.</a></p>*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
+
+                        </div>
+                        <div className="my-3 p-3 bg-body rounded shadow-sm">
+                            <div className="btn btn-outline-secondary" onClick={handleBackToChannels}>Back to Channels
+                            </div>
+                            <button className="btn btn-outline-secondary" onClick={() => redirectToChannel(id)}>close
+                            </button>
+                            <h3>Message</h3>
+                            <div className="message">
+                                <strong
+                                    className="text-gray-dark">{props.selectedMessage && props.selectedMessage.name}</strong>
+                                <div className="d-block">
+                                    {props.selectedMessage && props.selectedMessage.body}
+                                    {props.selectedMessage && props.parseImageUrls(props.selectedMessage.body).map((url, imgIndex) => (
+                                        <img key={imgIndex} src={url} alt="Message Attachment"
+                                             style={{
+                                                 maxWidth: '100px',
+                                                 maxHeight: '100px',
+                                                 marginTop: '10px'
+                                             }}/>
+                                    ))}
+                                </div>
+                            </div>
+                            <h3>Replies</h3>
+                            {props.replies && props.replies.length > 0 ? (
+                                props.replies.map((reply, index) => (
+                                    <div key={index} className="reply">
+                                        <strong className="text-gray-dark">{reply.name}</strong>
+                                        <div className="d-block">
+                                            {reply.body}
+                                            {/* Display images after the reply content */}
+                                            {props.parseImageUrls(reply.body).map((url, imgIndex) => (
+                                                <img key={imgIndex} src={url} alt="Message Attachment"
+                                                     style={{
+                                                         maxWidth: '100px',
+                                                         maxHeight: '100px',
+                                                         marginTop: '10px'
+                                                     }}/>
+                                            ))}
+                                        </div>
+
+                                        {reply.reactions && reply.reactions.length > 0 && (
+                                            <div className="reactions">
+                                                {reply.reactions.map((reaction, index) => (
+                                                    <span key={index} className="reaction"
+                                                          onMouseEnter={(e) => {
+                                                              // Show tooltip
+                                                              e.currentTarget.querySelector('.users').classList.add('show');
+                                                          }}
+                                                          onMouseLeave={(e) => {
+                                                              // Hide tooltip
+                                                              e.currentTarget.querySelector('.users').classList.remove('show');
+                                                          }}>
+                                                                    {reaction.emoji} {reaction.users.split(',').length}&nbsp;
+                                                        <span className="users">{reaction.users}</span>
+                                                                </span>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        <div className="message-reactions">
+                                            {['😀', '❤️', '👍'].map(emoji => (
+                                                <button type="button" className="btn btn-outline-light" key={emoji}
+                                                        onClick={() => props.handleAddReaction(message.id, emoji)}>{emoji}</button>
+                                            ))}
+                                        </div>
+
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No replies yet.</p>
+                            )}
+                            {(<div></div>)}
+
+
+
+
+
+                            <div className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 comment_box">
+                                <textarea
+                                    name="comment"
+                                    value={props.replyInput[props.selectedMessageId] || ''}
+                                    onChange={(e) => props.setReplyInput({
+                                        ...props.replyInput,
+                                        [props.selectedMessageId]: e.target.value
+                                    })}
+                                ></textarea>
+                                <button className="btn btn-primary"
+                                    onClick={(e) => props.handlePostReply(e, props.selectedMessageId)}>Post
+                                </button>
                             </div>
                         </div>
                     </div>
