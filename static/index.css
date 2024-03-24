@@ -270,7 +270,7 @@
     font-family: "Rowdies", cursive;
     position: relative;
     z-index: 2;
-    box-shadow: 0 10px 8px darkslateblue;
+    box-shadow: 0 10px 8px #007bff;
 }
 
 .header h2 {
@@ -278,7 +278,7 @@
     z-index: 3;
     font-size: 32px;
     color: white;
-    text-shadow: 1px 1px 5px black, 3px 3px 2px orange, -3px -1px 2px blue;
+    text-shadow: 1px 1px 5px black, 3px 3px 2px #007bff, -3px -1px 2px #007bff;
     font-family: "Rowdies", cursive;
     padding: 10px;
     display: block;
@@ -323,8 +323,8 @@
 }
 
 .thread-container{
-      display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr;
 }
 
 
@@ -561,16 +561,16 @@
 
 
 /*!* TODO: --------------------------------------------- 404 Page Styles --------------------------------------------- *!*/
-/*.notFound h1 {*/
-/*    margin: 20px 20px -300px 20px;*/
-/*    font-size: 500px;*/
-/*    color: #f0c0c0;*/
-/*}*/
+.notFound h1 {
+    margin: 20px 20px -300px 20px;
+    font-size: 500px;
+    color: #007bff;
+}
 
-/*.notFound .message {*/
-/*    margin-left: 100px;*/
-/*    text-shadow: 0 0 6px white;*/
-/*}*/
+.notFound .message {
+    margin-left: 100px;
+    text-shadow: 0 0 6px white;
+}
 
 
 /*!* TODO: --------------------------------------------- Emoji Styles --------------------------------------------- *!*/
