@@ -637,9 +637,30 @@
 /*    padding: 20px;*/
 /*}*/
 
-/*.back-button {*/
-/*    display: none;*/
-/*}*/
+.back-button {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .channel-container {
+        grid-template-columns: 1fr;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .back-button {
+        display: inline-block;
+        margin: 10px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
 
 /*!* narrow screen *!*/
 /*@media (max-width: 1000px) {*/

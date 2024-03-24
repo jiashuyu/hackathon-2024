@@ -979,6 +979,7 @@ function ChatChannel(props) {
     const [view, setView] = React.useState('message'); // set default view as channel messages
 
     React.useEffect(() => {
+        console.log("view page: " + view);
         if (!apiKey) {
             history.push('/login');
             alert("Please login before entering to the channels.")
@@ -1056,7 +1057,8 @@ function ChatChannel(props) {
 
                     <div className="channel-container">
 
-                        <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>
+                        {/*<div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>*/}
+                        <div className={`d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary ${view !== 'channel' ? 'd-none d-lg-flex' : ''}`} style={{width: "280px"}}>
                             <a href=" "
                                className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                                 <span className="fs-4">Channel List</span>
@@ -1107,10 +1109,12 @@ function ChatChannel(props) {
                         {/*    )}*/}
                         {/*</div>*/}
 
-                        <div className="my-3 p-3 bg-body rounded shadow-sm">
-                            <button type="button" class="btn btn-outline-secondary" onClick={handleBackToChannels}>Back
-                                to Channels
-                            </button>
+                        {/*<div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'hidden' : ''}`}>*/}
+                        <div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'd-none d-lg-block' : ''}`}>
+                            {/*<button type="button" className="back-button" onClick={handleBackToChannels}>Back*/}
+                            {/*    to Channels*/}
+                            {/*</button>*/}
+                            <div className="back-button" onClick={handleBackToChannels}>Channel List</div>
 
                             {props.messages.map((message, index) => (
 
@@ -1320,7 +1324,7 @@ function Thread(props) {
 
                     <div className="thread-container">
 
-                        <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>
+                        <div className={`d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary ${view !== 'channel' ? 'd-none d-lg-flex' : ''}`} style={{width: "280px"}}>
                             <a href=" "
                                className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                                 <span className="fs-4">Channel List</span>
@@ -1371,11 +1375,8 @@ function Thread(props) {
                         {/*    )}*/}
                         {/*</div>*/}
 
-                        <div className="my-3 p-3 bg-body rounded shadow-sm">
-                            <button type="button" className="btn btn-outline-secondary"
-                                    onClick={handleBackToChannels}>Back
-                                to Channels
-                            </button>
+                        <div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'd-none d-lg-block' : ''}`}>
+                            <div className="back-button" onClick={handleBackToChannels}>Channel List</div>
 
                             {props.messages.map((message, index) => (
 
@@ -1463,13 +1464,14 @@ function Thread(props) {
                             {/*        <p><a href="/">Let's go home and try again.</a></p>*/}
                             {/*    </div>*/}
                             {/*)}*/}
-
                         </div>
-                        <div className="my-3 p-3 bg-body rounded shadow-sm">
-                            <div className="btn btn-outline-secondary" onClick={handleBackToChannels}>Back to Channels
-                            </div>
-                            <button className="btn btn-outline-secondary" onClick={() => redirectToChannel(id)}>close
-                            </button>
+
+                        <div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'reply' ? 'd-none d-lg-block' : ''}`}>
+                            <div className="back-button" onClick={handleBackToChannels}>Channel List</div>
+
+                            <button className="btn btn-outline-secondary"
+                                    style={{ position: 'relative', top: 0, right: 0, }}
+                                    onClick={() => redirectToChannel(id)}>back</button>
                             <h3>Message</h3>
                             <div className="message">
                                 <strong
@@ -1538,9 +1540,6 @@ function Thread(props) {
                             {(<div></div>)}
 
 
-
-
-
                             <div className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 comment_box">
                                 <textarea
                                     name="comment"
@@ -1549,9 +1548,10 @@ function Thread(props) {
                                         ...props.replyInput,
                                         [props.selectedMessageId]: e.target.value
                                     })}
+                                    placeholder="What you want to reply?"
                                 ></textarea>
                                 <button className="btn btn-primary"
-                                    onClick={(e) => props.handlePostReply(e, props.selectedMessageId)}>Post
+                                        onClick={(e) => props.handlePostReply(e, props.selectedMessageId)}>Reply
                                 </button>
                             </div>
                         </div>
