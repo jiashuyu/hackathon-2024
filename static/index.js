@@ -1008,6 +1008,7 @@ function ChatChannel(props) {
         history.push(`/channel/${channelId}`);
         props.setSelectedMessageId(null);
         setView('message'); // show message once channel is clicked
+        //props.setIsEditing(false);
     };
 
     const redirectToThread = (channelId, messageId) => {
@@ -1045,7 +1046,7 @@ function ChatChannel(props) {
                                     <h3>
                                         Chatting in <input value={props.newChannelName}
                                                            onChange={(e) => props.setNewChannelName(e.target.value)}/>
-                                        <button onClick={() => props.handleUpdateChannelName(id)}>Update</button>
+                                        <button className="btn btn-outline-secondary" onClick={() => props.handleUpdateChannelName(id)}>Update</button>
                                     </h3>
                                 </div>
                             )}
@@ -1066,12 +1067,30 @@ function ChatChannel(props) {
                                             <a className="nav-link link-body-emphasis" key={channel.id}
                                                onClick={() => redirectToChannel(channel.id)}
                                                style={{backgroundColor: channel.id === parseInt(id, 10) ? '#0d6efd' : 'transparent'}}>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                     fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
-                                                </svg>
-                                                {channel.name}
+
+                                                {props.isEditing && channel.name === props.channel.name ? (
+                                                    <div>
+                                                        <font color="white">Update Channel Name: </font>
+                                                            <input value={props.newChannelName}
+                                                                   onChange={(e) => props.setNewChannelName(e.target.value)}/>
+                                                            <button className="btn btn-light rounded-pill px-3"
+                                                                    onClick={() => props.handleUpdateChannelName(id)}>Update
+                                                            </button>
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" className="bi bi-bookmark"
+                                                             viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                                                        </svg>
+                                                        {channel.name}
+                                                        <a onClick={props.handleEditClick}><span
+                                                            className="material-symbols-outlined md-18">edit</span></a>
+                                                    </div>
+                                                )}
+
                                                 {props.unreadCounts[channel.id] !== 0 && props.user &&
                                                     <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
                                             </a>
@@ -1086,13 +1105,14 @@ function ChatChannel(props) {
 
                         </div>
 
-                        <div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'd-none d-lg-block' : ''}`}>
+                        <div
+                            className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'd-none d-lg-block' : ''}`}>
                             <div className="back-button" onClick={handleBackToChannels}>Channel List</div>
 
                             {props.messages.map((message, index) => (
 
                                 <div className="d-flex text-body-secondary pt-3">
-                                    <svg className="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32"
+                                <svg className="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32"
                                          height="32"
                                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
                                          preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -1189,8 +1209,9 @@ function Thread(props) {
     const [valid, setValid] = React.useState(true); // state to check if message exists in current channel
 
     React.useEffect(() => {
-        console.log("selected message author: ", props.selectedMessage.name);
-        console.log("selected message id: ", props.selectedMessage.id);
+        //console.log("selected message author: ", props.selectedMessage.name);
+        //console.log("selected message id: ", props.selectedMessage.id);
+        console.log("selected replies: ", props.repliesCount);
         if (!apiKey) {
             history.push('/login');
             alert("Please login before entering to the thread.")
@@ -1226,6 +1247,7 @@ function Thread(props) {
         history.push(`/channel/${channelId}`);
         props.setSelectedMessageId(null);
         setView('message');
+        //props.setIsEditing(false);
     };
 
     const redirectToThread = (channelId, messageId) => {
@@ -1280,7 +1302,7 @@ function Thread(props) {
                                     <h3>
                                         Chatting in <input value={props.newChannelName}
                                                            onChange={(e) => props.setNewChannelName(e.target.value)}/>
-                                        <button onClick={() => props.handleUpdateChannelName(id)}>Update</button>
+                                        <button className="btn btn-outline-secondary" onClick={() => props.handleUpdateChannelName(id)}>Update</button>
                                     </h3>
                                 </div>
                             )}
@@ -1300,12 +1322,28 @@ function Thread(props) {
                                             <a className="nav-link link-body-emphasis" key={channel.id}
                                                onClick={() => redirectToChannel(channel.id)}
                                                style={{backgroundColor: channel.id === parseInt(id, 10) ? '#0d6efd' : 'transparent'}}>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                     fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
-                                                </svg>
-                                                {channel.name}
+                                                {props.isEditing && channel.name === props.channel.name ? (
+                                                    <div>
+                                                        <font color="white">Update Channel Name: </font>
+                                                            <input value={props.newChannelName}
+                                                                   onChange={(e) => props.setNewChannelName(e.target.value)}/>
+                                                            <button className="btn btn-light rounded-pill px-3"
+                                                                    onClick={() => props.handleUpdateChannelName(id)}>Update
+                                                            </button>
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" className="bi bi-bookmark"
+                                                             viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                                                        </svg>
+                                                        {channel.name}
+                                                        <a onClick={props.handleEditClick}><span
+                                                            className="material-symbols-outlined md-18">edit</span></a>
+                                                    </div>
+                                                )}
                                                 {props.unreadCounts[channel.id] !== 0 && props.user &&
                                                     <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
                                             </a>
