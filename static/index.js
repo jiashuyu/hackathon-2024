@@ -539,8 +539,7 @@ function SplashScreen(props) {
         <div className="home-container">
 
             <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>
-                <a href=" "
-                   className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <a className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <span className="fs-4">Channel List</span>
                 </a>
                 <hr></hr>
@@ -1050,17 +1049,13 @@ function ChatChannel(props) {
                                     </h3>
                                 </div>
                             )}
-                            Invite users to this chat at:
-                            <a href={`/channel/${id}`}>/channel/{id}</a>
                         </div>
                     </div>
 
                     <div className="channel-container">
 
-                        {/*<div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: "280px"}}>*/}
                         <div className={`d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary ${view !== 'channel' ? 'd-none d-lg-flex' : ''}`} style={{width: "280px"}}>
-                            <a href=" "
-                               className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                            <a className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                                 <span className="fs-4">Channel List</span>
                             </a>
                             <hr></hr>
@@ -1091,29 +1086,7 @@ function ChatChannel(props) {
 
                         </div>
 
-                        {/*<div className={`channel-list ${view !== 'channel' ? 'hidden' : ''}`}>*/}
-                        {/*    {props.channels.length > 0 ? (*/}
-                        {/*        <div className="channelList">*/}
-                        {/*            {props.channels.map((channel) => (*/}
-                        {/*                <button key={channel.id} onClick={() => redirectToChannel(channel.id)}*/}
-                        {/*                        style={{backgroundColor: channel.id === parseInt(id, 10) ? 'orange' : 'transparent'}}>*/}
-                        {/*                    {channel.name}*/}
-                        {/*                    {props.unreadCounts[channel.id] !== 0 && props.user &&*/}
-                        {/*                        <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}*/}
-                        {/*                </button>*/}
-                        {/*            ))}*/}
-                        {/*        </div>*/}
-                        {/*    ) : (*/}
-                        {/*        <div className="noChannels">No channels yet! Create the first channel on*/}
-                        {/*            HackaChat!</div>*/}
-                        {/*    )}*/}
-                        {/*</div>*/}
-
-                        {/*<div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'hidden' : ''}`}>*/}
                         <div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'd-none d-lg-block' : ''}`}>
-                            {/*<button type="button" className="back-button" onClick={handleBackToChannels}>Back*/}
-                            {/*    to Channels*/}
-                            {/*</button>*/}
                             <div className="back-button" onClick={handleBackToChannels}>Channel List</div>
 
                             {props.messages.map((message, index) => (
@@ -1196,14 +1169,6 @@ function ChatChannel(props) {
                                 </button>
                             </div>
 
-                            {/*{!props.messages.length && (*/}
-                            {/*    <div>*/}
-                            {/*        <h2>Oops, we can't find that channel!</h2>*/}
-                            {/*        <p><a href="/">Let's go home and try again.</a></p>*/}
-                            {/*    </div>*/}
-                            {/*)}*/}
-
-
                         </div>
 
                     </div>
@@ -1224,6 +1189,8 @@ function Thread(props) {
     const [valid, setValid] = React.useState(true); // state to check if message exists in current channel
 
     React.useEffect(() => {
+        console.log("selected message author: ", props.selectedMessage.name);
+        console.log("selected message id: ", props.selectedMessage.id);
         if (!apiKey) {
             history.push('/login');
             alert("Please login before entering to the thread.")
@@ -1317,16 +1284,12 @@ function Thread(props) {
                                     </h3>
                                 </div>
                             )}
-                            Invite users to this chat at:
-                            <a href={`/channel/${id}`}>/channel/{id}</a>
                         </div>
                     </div>
 
                     <div className="thread-container">
-
                         <div className={`d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary ${view !== 'channel' ? 'd-none d-lg-flex' : ''}`} style={{width: "280px"}}>
-                            <a href=" "
-                               className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                            <a className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                                 <span className="fs-4">Channel List</span>
                             </a>
                             <hr></hr>
@@ -1347,37 +1310,16 @@ function Thread(props) {
                                                     <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}
                                             </a>
                                         </li>
-
                                     ))}
                                 </ul>
                             ) : (
                                 <div>No channels yet! Create the first channel on HackaChat!</div>
                             )}
                             <hr></hr>
-
                         </div>
-
-                        {/*<div className={`channel-list ${view !== 'channel' ? 'hidden' : ''}`}>*/}
-                        {/*    {props.channels.length > 0 ? (*/}
-                        {/*        <div className="channelList">*/}
-                        {/*            {props.channels.map((channel) => (*/}
-                        {/*                <button key={channel.id} onClick={() => redirectToChannel(channel.id)}*/}
-                        {/*                        style={{backgroundColor: channel.id === parseInt(id, 10) ? 'orange' : 'transparent'}}>*/}
-                        {/*                    {channel.name}*/}
-                        {/*                    {props.unreadCounts[channel.id] !== 0 && props.user &&*/}
-                        {/*                        <strong>({props.unreadCounts[channel.id]} unread messages)</strong>}*/}
-                        {/*                </button>*/}
-                        {/*            ))}*/}
-                        {/*        </div>*/}
-                        {/*    ) : (*/}
-                        {/*        <div className="noChannels">No channels yet! Create the first channel on*/}
-                        {/*            HackaChat!</div>*/}
-                        {/*    )}*/}
-                        {/*</div>*/}
 
                         <div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'message' ? 'd-none d-lg-block' : ''}`}>
                             <div className="back-button" onClick={handleBackToChannels}>Channel List</div>
-
                             {props.messages.map((message, index) => (
 
                                 <div className="d-flex text-body-secondary pt-3">
@@ -1458,12 +1400,6 @@ function Thread(props) {
                                 </button>
                             </div>
 
-                            {/*{!props.messages.length && (*/}
-                            {/*    <div>*/}
-                            {/*        <h2>Oops, we can't find that channel!</h2>*/}
-                            {/*        <p><a href="/">Let's go home and try again.</a></p>*/}
-                            {/*    </div>*/}
-                            {/*)}*/}
                         </div>
 
                         <div className={`my-3 p-3 bg-body rounded shadow-sm ${view !== 'reply' ? 'd-none d-lg-block' : ''}`}>
@@ -1528,7 +1464,7 @@ function Thread(props) {
                                         <div className="message-reactions">
                                             {['😀', '❤️', '👍'].map(emoji => (
                                                 <button type="button" className="btn btn-outline-light" key={emoji}
-                                                        onClick={() => props.handleAddReaction(message.id, emoji)}>{emoji}</button>
+                                                        onClick={() => props.handleAddReaction(reply.id, emoji)}>{emoji}</button>
                                             ))}
                                         </div>
 
